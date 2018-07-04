@@ -2,6 +2,7 @@
 FROM alpine:3.5
 
 RUN   mkdir /crontab-ui; touch /etc/crontabs/root; chmod +x /etc/crontabs/root
+RUN chmod -R g+w /crontab-ui
 
 WORKDIR /crontab-ui
 
