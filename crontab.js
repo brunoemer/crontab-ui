@@ -131,6 +131,11 @@ exports.set_crontab = function(env_vars, callback){
 			}
 			fs.writeFile(path.join(cronPath, fileName), crontab_string, function(err) {
 				if (err) return callback(err);
+
+				exec("ps -ef | grep 'python main.py --crontab' | grep -v grep | awk '{print $2}' | xargs kill", function(err) {
+                                        if (err) return callback(err);
+                                        else callback();
+                                });
 				/// In docker we're running crond using busybox implementation of crond
 				/// It is launched as part of the container startup process, so no need to run it again
 				if(process.env.CRON_IN_DOCKER === undefined) {
