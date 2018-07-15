@@ -43,7 +43,6 @@ var basic = auth.basic({
     file: __dirname + "/../etc/users.htpasswd"
 });
 
-var app = express();
 app.use(auth.connect(basic));
 
 // root page handler
