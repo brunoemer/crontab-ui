@@ -15,7 +15,8 @@
     "cron-parser": "latest",
     "connect-busboy": "latest",
     "moment": "latest",
-    "nodemailer": "latest"
+    "nodemailer": "latest",
+    "http-auth": "latest"
   },
   "engines": {
     "node": "latest"

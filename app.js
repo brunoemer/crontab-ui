@@ -10,6 +10,8 @@ var mime = require('mime-types');
 var fs = require('fs');
 var busboy = require('connect-busboy'); // for file upload
 
+var auth = require('http-auth');
+
 // include the routes
 var routes = require("./routes").routes;
 
@@ -36,8 +38,17 @@ app.set('host', (process.env.HOST || '127.0.0.1'));
 // set port to 8000 or the value set by environment var PORT
 app.set('port', (process.env.PORT || 8000));
 
+var basic = auth.basic({
+    realm: "Restricted area",
+    file: __dirname + "/../etc/users.htpasswd"
+});
+
+var app = express();
+app.use(auth.connect(basic));
+
 // root page handler
 app.get(routes.root, function(req, res) {
+	console.log("login: " + req.user);
   // reload the database before rendering
 	crontab.reload_db();
 	// send all the required parameters
