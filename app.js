@@ -40,7 +40,7 @@ app.set('port', (process.env.PORT || 8000));
 
 var basic = auth.basic({
     realm: "Restricted area",
-    file: __dirname + "/../etc/users.htpasswd"
+    file: "/etc/crontabcustom/users.htpasswd"
 });
 
 app.use(auth.connect(basic));
